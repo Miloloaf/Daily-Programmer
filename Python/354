@@ -1,0 +1,19 @@
+## [2018-03-12] Challenge #354 [Easy] Integer Complexity 1
+## https://www.reddit.com/r/dailyprogrammer/comments/83uvey/20180312_challenge_354_easy_integer_complexity_1/
+
+import math
+
+def solver354 (number):
+    mylist = []
+    smallest = number
+    for i in range(1,int(math.sqrt(number))):
+        if number%i == 0:
+            mylist.append([i, number//i])
+
+    for i in mylist:
+        if sum(i) < smallest:
+            smallest = sum(i)
+
+    print (smallest)
+
+solver354 (1234567891011)
