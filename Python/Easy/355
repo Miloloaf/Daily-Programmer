@@ -6,7 +6,6 @@ from string import ascii_lowercase as alphabet
 
 foo,bar = 'snitch','thepackagehasbeendelivered'
 
-
 def alphabet_cipher(sec, message):
     count = 0
     code = ""
@@ -15,11 +14,8 @@ def alphabet_cipher(sec, message):
     for i in cycle(sec): #
         if count > len(message):
             break
-        # print(i)
         index = alphabet.find(i)
         cipherbet = alphabet[index:] + alphabet[:index]
-        # print(alphabet)
-        # print(cipherbet)
         if i not in cipher_alpha:
             cipher_alpha[i] = cipherbet
         code += i
@@ -32,9 +28,6 @@ def alphabet_cipher(sec, message):
         decrypt = cipher_alpha[sec_target][index]
         encrypt_message += decrypt
 
-    # print(code)
-    # print(cipher_alpha)
-    # print(cipher_alpha['s'])
     print(encrypt_message)
 
 alphabet_cipher(foo,bar)
@@ -44,14 +37,11 @@ def alphabet_decipher(sec, message):
     code = ""
     cipher_alpha = {}
     decrypt_message = ""
-    for i in cycle(sec): #
+    for i in cycle(sec): 
         if count > len(message):
             break
-        # print(i)
         index = alphabet.find(i)
         cipherbet = alphabet[index:] + alphabet[:index]
-        # print(alphabet)
-        # print(cipherbet)
         if i not in cipher_alpha:
             cipher_alpha[i] = cipherbet
         code += i
@@ -65,7 +55,6 @@ def alphabet_decipher(sec, message):
         decrypt = alphabet[index]
         decrypt_message += decrypt
 
-    # print(cipher_alpha)
     print(decrypt_message)
 
 x,y = 'cloak', 'klatrgafedvtssdwywcyty'
