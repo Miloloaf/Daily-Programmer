@@ -1,0 +1,73 @@
+## [2018-03-26] Challenge #355 [Easy] Alphabet Cipher
+## https://www.reddit.com/r/dailyprogrammer/comments/879u8b/20180326_challenge_355_easy_alphabet_cipher/
+
+from itertools import cycle
+from string import ascii_lowercase as alphabet
+
+foo,bar = 'snitch','thepackagehasbeendelivered'
+
+
+def alphabet_cipher(sec, message):
+    count = 0
+    code = ""
+    cipher_alpha = {}
+    encrypt_message = ""
+    for i in cycle(sec): #
+        if count > len(message):
+            break
+        # print(i)
+        index = alphabet.find(i)
+        cipherbet = alphabet[index:] + alphabet[:index]
+        # print(alphabet)
+        # print(cipherbet)
+        if i not in cipher_alpha:
+            cipher_alpha[i] = cipherbet
+        code += i
+        count += 1
+
+    for j in range(len(message)):
+        sec_target = code[j]
+        message_target = message[j]
+        index = alphabet.find(message_target)
+        decrypt = cipher_alpha[sec_target][index]
+        encrypt_message += decrypt
+
+    # print(code)
+    # print(cipher_alpha)
+    # print(cipher_alpha['s'])
+    print(encrypt_message)
+
+alphabet_cipher(foo,bar)
+
+def alphabet_decipher(sec, message):
+    count = 0
+    code = ""
+    cipher_alpha = {}
+    decrypt_message = ""
+    for i in cycle(sec): #
+        if count > len(message):
+            break
+        # print(i)
+        index = alphabet.find(i)
+        cipherbet = alphabet[index:] + alphabet[:index]
+        # print(alphabet)
+        # print(cipherbet)
+        if i not in cipher_alpha:
+            cipher_alpha[i] = cipherbet
+        code += i
+        count += 1
+
+    for j in range(len(message)):
+        sec_target = code[j]
+        cipherbet = cipher_alpha[sec_target]
+        message_target = message[j]
+        index = cipherbet.find(message_target)
+        decrypt = alphabet[index]
+        decrypt_message += decrypt
+
+    # print(cipher_alpha)
+    print(decrypt_message)
+
+x,y = 'cloak', 'klatrgafedvtssdwywcyty'
+
+alphabet_decipher(x,y)
