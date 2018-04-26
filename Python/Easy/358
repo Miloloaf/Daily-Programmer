@@ -1,0 +1,68 @@
+## [2018-04-23] Challenge #358 [Easy] Decipher The Seven Segments
+## https://www.reddit.com/r/dailyprogrammer/comments/8eger3/20180423_challenge_358_easy_decipher_the_seven/
+
+import re
+
+a = " _     _  _     _  _  _  _  _ "
+b = "| |  | _| _||_||_ |_   ||_||_|"
+c = "|_|  ||_  _|  | _||_|  ||_| _|"
+
+number_dict = {}
+for x in range(len(a) // 3): # sets base dictionary of digits
+    counter = x
+    conc = (re.findall("...", a))[x] + (re.findall("...", b))[x] + (re.findall("...", c))[x]
+    number_dict[conc] = counter
+    
+#s = string of digits
+s = """    _  _  _  _  _  _  _  _ 
+|_| _| _||_|| ||_ |_| _||_ 
+  | _| _||_||_| _||_||_  _|
+"""
+
+string_split = []
+
+for line in s.splitlines():
+    string_split.append(line)
+
+s0 = string_split[0]
+s1 = string_split[1]
+s2 = string_split[2]
+
+string_digits = ""
+for y in range(len(s0)//3):
+    counter = y
+    conc = (re.findall("...",s0))[y] + (re.findall("...",s1))[y] + (re.findall("...",s2))[y]
+    
+    string_digits += str(number_dict.get(conc))
+
+print(s)
+print(string_digits)
+
+"""
+    _  _     _  _  _  _  _
+  | _| _||_||_ |_   ||_||_|
+  ||_  _|  | _||_|  ||_| _|
+
+    _  _  _  _  _  _  _  _ 
+|_| _| _||_|| ||_ |_| _||_ 
+  | _| _||_||_| _||_||_  _|
+
+ _  _  _  _  _  _  _  _  _ 
+|_  _||_ |_| _|  ||_ | ||_|
+ _||_ |_||_| _|  ||_||_||_|
+
+ _  _        _  _  _  _  _ 
+|_||_ |_|  || ||_ |_ |_| _|
+ _| _|  |  ||_| _| _| _||_ 
+
+"""
+
+
+
+
+
+
+
+
+
+
