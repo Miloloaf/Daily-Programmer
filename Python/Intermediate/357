@@ -1,0 +1,37 @@
+## [2018-04-19] Challenge #357 [Intermediate] Kolakoski Sequences
+## https://www.reddit.com/r/dailyprogrammer/comments/8df7sm/20180419_challenge_357_intermediate_kolakoski/
+
+## Misread question and need to change n to be a ratio input rather than number of cycles
+
+import itertools
+
+numbers = ["1","2"]
+cyclenumbers = itertools.cycle(numbers)
+nextnum = next(cyclenumbers)
+
+def kola(n):
+    sequence = "1"
+    startsequence = 0
+    for i in cyclenumbers:
+        if n > 0:
+            lastnum = int(sequence[startsequence]) # retrieves the lastest run
+            startsequence += 1
+            appendage = (lastnum * i) # works out the next sequence to attatch
+            sequence += appendage
+            # print(sequence)
+            # print(i)
+            # print (n)
+            n -= 1
+        else:
+            break
+    finalsequence = (sequence[:2]+sequence[1:]) # fudge fix
+    ratio1 = finalsequence.count("1")
+    ratio2 = finalsequence.count("2")
+    print(str(ratio1)+":"+str(ratio2))
+    
+kola(65)
+
+
+
+
+
