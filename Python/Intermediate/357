@@ -1,37 +1,29 @@
 ## [2018-04-19] Challenge #357 [Intermediate] Kolakoski Sequences
 ## https://www.reddit.com/r/dailyprogrammer/comments/8df7sm/20180419_challenge_357_intermediate_kolakoski/
 
-## Misread question and need to change n to be a ratio input rather than number of cycles
-
 import itertools
 
-numbers = ["1","2"]
-cyclenumbers = itertools.cycle(numbers)
-nextnum = next(cyclenumbers)
+numbers = ["1","2"] # numbers to cycle through
 
 def kola(n):
-    sequence = "1"
-    startsequence = 0
-    for i in cyclenumbers:
-        if n > 0:
-            lastnum = int(sequence[startsequence]) # retrieves the lastest run
-            startsequence += 1
-            appendage = (lastnum * i) # works out the next sequence to attatch
-            sequence += appendage
-            # print(sequence)
-            # print(i)
-            # print (n)
-            n -= 1
-        else:
-            break
-    finalsequence = (sequence[:2]+sequence[1:]) # fudge fix
-    ratio1 = finalsequence.count("1")
-    ratio2 = finalsequence.count("2")
-    print(str(ratio1)+":"+str(ratio2))
+    sequence = "122"
+    startsequence = 2
     
-kola(65)
+    cyclenumbers = itertools.cycle(numbers) # cycles numbers
+    while True:
+        if len(sequence) >= n: # exits loop once desired total n is reached
+            break
+        
+        nextnum = next(cyclenumbers) # grabs the next number in the cycle list
+        sequence += int(sequence[startsequence]) * str(nextnum)
+        startsequence += 1 # iterates next number in sequence string
+    
+    finalsequence = sequence[:n]
+    count1 = finalsequence.count("1")
+    count2 = finalsequence.count("2")
 
+    print(sequence)
+    print ("%d : %d" % (count1, count2))
+    print ("Ended Correctly")
 
-
-
-
+kola(100)
