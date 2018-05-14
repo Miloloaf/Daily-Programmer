@@ -1,0 +1,13 @@
+## [2018-04-30] Challenge #359 [Easy] Regular Paperfold Sequence Generator
+## https://old.reddit.com/r/dailyprogrammer/comments/8g0iil/20180430_challenge_359_easy_regular_paperfold/
+
+def dragon_curve(folds):
+    sequence = "1"
+    for i in range(folds-1): #folds -1 to return the correct folding
+        mid = int((len(sequence)//2) + 0.5) # retrieves previous sequence middle index
+        pre_seq = sequence
+        appendage_seq = pre_seq[:mid] + "0" + pre_seq[mid+1:]
+        sequence += "1" + appendage_seq # appends the 1 onto the end
+    return (sequence)
+
+print (dragon_curve(8))
