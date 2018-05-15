@@ -1,0 +1,34 @@
+import re
+
+file_path = r"C:\Users\ml044041\Python\Text Docs\NBA.txt"
+
+with open(file_path, "r") as content:
+    file = content.read()
+    
+new_line = re.split(r"(\n)", file) # new lines are separated into a list
+
+def generate_new_lines():
+    for i in range(len(new_line)):
+        if new_line[i] != "\n":
+            print(new_line[i])
+        
+print(generate_new_lines())
+
+# foo = re.findall('(?<=<pre>)[\S, ]+', file)
+
+# print (foo)
+
+# def cleanhtml(raw_html):
+#     cleanr = re.compile('<.*?>')
+#     cleantext = re.sub(cleanr, "", raw_html)
+#     return cleantext
+# 
+# cleaned_file = cleanhtml(file)
+# # for line in file:
+# #     print(line)
+# 
+# print(re.findall("(?<=[ @])[\w-]+[\s?][\w@-]+[\s?][\w@-]*",cleaned_file))
+
+
+
+# (?<=[ @])[\w-]+[\s+][\w@-]+
