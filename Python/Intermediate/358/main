@@ -1,18 +1,43 @@
+## [2018-04-25] Challenge #358 [Intermediate] Everyone's A Winner!
+## https://www.reddit.com/r/dailyprogrammer/comments/8ewq2e/20180425_challenge_358_intermediate_everyones_a/
+
 import re
 
-file_path = r"C:\Users\ml044041\Python\Text Docs\NBA.txt"
+# file_path = r"C:\Users\ml044041\Python\Text Docs\NBA.txt" # work
+file_path = r"I:\Python Scripts\Text_Files\NBA.txt" # home
 
 with open(file_path, "r") as content:
-    file = content.read()
-    
-new_line = re.split(r"(\n)", file) # new lines are separated into a list
+    file = content.read().splitlines()
+    # file2 = content.read()
+# file2 = open(file_path).readlines()
+# print(file2)
+print(file)
 
-def generate_new_lines():
-    for i in range(len(new_line)):
-        if new_line[i] != "\n":
-            print(new_line[i])
-        
-print(generate_new_lines())
+
+# file = open(file_path).read()
+# print(file)
+
+# file = file.replace("\n","")
+# new_line = re.split(r"(\n)", file)  # new lines are separated into a list
+#
+# new_line2 = [x.replace("\\n"," ") for x in new_line]
+# print (new_line2)
+#
+# print("\n" in new_line)
+
+# def generate_new_lines():
+#     for i in range(len(new_line)):
+#         if new_line[i] != "\n":
+#             print(new_line[i])
+#
+#
+# print(generate_new_lines())
+# print (new_line)
+# new_line.remove("\\n")
+
+# new_line[:] = [x for x in new_line if x !=r"\n"]
+
+# print(new_line)
 
 # foo = re.findall('(?<=<pre>)[\S, ]+', file)
 
@@ -22,13 +47,12 @@ print(generate_new_lines())
 #     cleanr = re.compile('<.*?>')
 #     cleantext = re.sub(cleanr, "", raw_html)
 #     return cleantext
-# 
+#
 # cleaned_file = cleanhtml(file)
 # # for line in file:
 # #     print(line)
-# 
+#
 # print(re.findall("(?<=[ @])[\w-]+[\s?][\w@-]+[\s?][\w@-]*",cleaned_file))
-
 
 
 # (?<=[ @])[\w-]+[\s+][\w@-]+
