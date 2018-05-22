@@ -13,6 +13,10 @@ with open(file_path, "r") as content:
 # print(file2)
 print(file)
 
+for line in file:
+    extraction = re.findall(r"(?<=[ @])(\w+)(?=[ ])",line)
+    print(extraction)
+
 
 # file = open(file_path).read()
 # print(file)
