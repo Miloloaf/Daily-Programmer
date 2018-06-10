@@ -15,8 +15,10 @@ with open(file_path, "r") as content:
 mylist = []
 def list_in_list(mylist):
     for line in file:
-        extraction = re.findall(r"(?<=[ @])(\w+)(?=[ ])",line)
-        mylist.append(extraction)
+        # extraction = re.findall(r"(?<=[ @])(\w+)(?=[ ])",line)
+        extraction_2 = re.split(r"\s+", line)
+        # mylist.append(extraction)
+        mylist.append(extraction_2[1:])
     return mylist
 
 def initial_clean(mylist):
@@ -50,6 +52,8 @@ def join_scores(mylist):
                 current_string = ""
 
             elif isinstance (element, str):
+                if re.search("@", element):
+                    element = element [1:]
                 element += " "
                 current_string += element
             else:
@@ -75,10 +79,41 @@ def populate_teams(mylist):
     for list in mylist:
         for element in list:
             if not element.isdigit() and element not in teams:
-                print (element)
+                # print (element)
                 teams.append(element)
     return teams
 
+def winner(mylist):
+    number_of_wins = {}
+    for list in mylist:
+        # print(list)
+        if list[1] > list[-1]:
+            number_of_wins.setdefault(list[0],0)
+            number_of_wins[list[0]] += 1
+        elif list[1] < list[-1]:
+            number_of_wins.setdefault(list[2], 0)
+            number_of_wins[list[2]] += 1
+
+    winner_score = 0
+    temp_winner = ""
+
+    for team, wins in number_of_wins.items():
+        if wins > winner_score:
+            # print(team)
+            winner_score = wins
+            temp_winner = team
+    print(temp_winner)
+    print("Winner is:", temp_winner, "With a total number of victories of:", winner_score)
+    return number_of_wins
+
+def transitive (team_list, all_scores):
+    new_list = team_list.copy()
+
+    for match in all_scores:
+        for score in match:
+            if score[1] > score[-1]:
+
+            elif score[1] < score[-1]:
 
 
 
@@ -90,8 +125,11 @@ initial_clean(foo)
 bar = join_scores(foo)
 bar_2 = initial_clean(bar)
 bar_3 = (clean_two(bar_2))
-print(populate_teams(bar_3))
+teams = populate_teams(bar_3)
 
+# print(foo)
+# print(winner(bar_3))
+print(bar_3)
 
 # Return list with all teams
 # Overall winner = number 1 so can remove that team from this list
