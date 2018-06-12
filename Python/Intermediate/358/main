@@ -3,8 +3,8 @@
 
 import re
 
-# file_path = r"C:\Users\ml044041\Python\Text Docs\NBA.txt" # work
-file_path = r"I:\Python Scripts\Text_Files\NBA.txt" # home
+file_path = r"C:\Users\ml044041\Python\Text Docs\NBA.txt" # work
+# file_path = r"I:\Python Scripts\Text_Files\NBA.txt" # home
 
 with open(file_path, "r") as content:
     file = content.read().splitlines()
@@ -108,13 +108,16 @@ def winner(mylist):
 
 def transitive (team_list, all_scores):
     new_list = team_list.copy()
-
-    for match in all_scores:
-        for score in match:
-            if score[1] > score[-1]:
-
-            elif score[1] < score[-1]:
-
+    winning_teams = []
+    switch = True
+    if switch:
+        switch = False
+        for match in all_scores:
+            for score in match:
+                if score[1] > score[-1]:
+                    print("blah")
+                elif score[1] < score[-1]:
+                    print("bloo")
 
 
 ## then if there are 4 elements in the list
