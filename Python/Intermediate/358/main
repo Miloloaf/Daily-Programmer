@@ -122,7 +122,9 @@ def transitive (team_list, all_scores):
     if switch:
         switch = False
         for match in all_scores:
-            winning_team_in_match(match)
+            for team in winning_teams:
+                if team in match:
+                    winning_team_in_match(match, switch)
 
 
 ## then if there are 4 elements in the list
