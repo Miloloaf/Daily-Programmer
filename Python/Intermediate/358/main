@@ -3,8 +3,8 @@
 
 import re
 
-file_path = r"C:\Users\ml044041\Python\Text Docs\NBA.txt" # work
-# file_path = r"I:\Python Scripts\Text_Files\NBA.txt" # home
+# file_path = r"C:\Users\ml044041\Python\Text Docs\NBA.txt" # work
+file_path = r"I:\Python Scripts\Text_Files\NBA.txt" # home
 
 with open(file_path, "r") as content:
     file = content.read().splitlines()
@@ -106,25 +106,38 @@ def winner(mylist):
     print("Winner is:", temp_winner, "With a total number of victories of:", winner_score)
     return number_of_wins
 
-def winning_team_in_match(list, switch):
-    for score in list:
-        if score[1] > score[-1]:
-            switch = True
-            return(score[0])
-        elif score[1] < score[-1]:
-            switch = True
-            return(score[2])
+def winning_team_in_match(mylist, switch):
+    if mylist[1] > mylist[-1]:
+        switch = True
+        return(mylist[0])
+    elif mylist[1] < mylist[-1]:
+        switch = True
+        return(mylist[2])
 
 def transitive (team_list, all_scores):
     new_list = team_list.copy()
-    winning_teams = []
+    winning_teams = ["Ferris St",]
     switch = True
-    if switch:
+    switch_counter = 0
+    while switch:
         switch = False
+        switch_counter += 1
         for match in all_scores:
+            # print(match)
             for team in winning_teams:
                 if team in match:
-                    winning_team_in_match(match, switch)
+                    print("Team in Match")
+                    print("Match:", match)
+                    winners = winning_team_in_match(match, switch)
+                    print(winners)
+                    if winners not in winning_teams:
+                        winning_teams.append(winners)
+                    print()
+                    print(switch_counter)
+                    print(switch)
+
+    return winning_teams
+
 
 
 ## then if there are 4 elements in the list
@@ -138,8 +151,9 @@ bar_3 = (clean_two(bar_2))
 teams = populate_teams(bar_3)
 
 # print(foo)
-# print(winner(bar_3))
+print(winner(bar_3))
 print(bar_3)
+print(len(transitive(teams, bar_3)))
 
 # Return list with all teams
 # Overall winner = number 1 so can remove that team from this list
