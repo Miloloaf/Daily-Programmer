@@ -109,32 +109,34 @@ def winner(mylist):
 def winning_team_in_match(mylist, switch):
     if mylist[1] > mylist[-1]:
         switch = True
-        return(mylist[0])
+        return(mylist[0], switch)
     elif mylist[1] < mylist[-1]:
         switch = True
-        return(mylist[2])
+        return(mylist[2], switch)
 
 def transitive (team_list, all_scores):
-    new_list = team_list.copy()
+    mod_team_list = all_scores.copy()
     winning_teams = ["Ferris St",]
     switch = True
     switch_counter = 0
     while switch:
         switch = False
         switch_counter += 1
-        for match in all_scores:
-            # print(match)
+        for match in mod_team_list:
             for team in winning_teams:
                 if team in match:
-                    print("Team in Match")
+                    print("Team:", team, "matched")
                     print("Match:", match)
-                    winners = winning_team_in_match(match, switch)
-                    print(winners)
+
+                    winners, switch = (winning_team_in_match(match, switch))
+
+
                     if winners not in winning_teams:
                         winning_teams.append(winners)
                     print()
                     print(switch_counter)
                     print(switch)
+                    mod_team_list.remove(match)
 
     return winning_teams
 
