@@ -122,8 +122,8 @@ def transitive (team_list, all_scores):
     while switch:
         switch = False
         switch_counter += 1
-        for match in mod_team_list:
-            for team in winning_teams:
+        for team in winning_teams:
+            for match in mod_team_list:
                 if team in match:
                     print("Team:", team, "matched")
                     print("Match:", match)
@@ -133,10 +133,16 @@ def transitive (team_list, all_scores):
 
                     if winners not in winning_teams:
                         winning_teams.append(winners)
+                    print("Winners:", winners)
                     print()
                     print(switch_counter)
                     print(switch)
+                    print("Matches left to sort:", len(mod_team_list))
                     mod_team_list.remove(match)
+                    print("----------------------")
+            print("********")
+            print("Teams not matched:", team)
+            print("Match:", match)
 
     return winning_teams
 
@@ -156,6 +162,7 @@ teams = populate_teams(bar_3)
 print(winner(bar_3))
 print(bar_3)
 print(len(transitive(teams, bar_3)))
+print(len(bar_3))
 
 # Return list with all teams
 # Overall winner = number 1 so can remove that team from this list
