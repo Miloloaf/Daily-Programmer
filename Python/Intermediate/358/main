@@ -8,16 +8,12 @@ file_path = r"I:\Python Scripts\Text_Files\NBA.txt" # home
 
 with open(file_path, "r") as content:
     file = content.read().splitlines()
-    # file2 = content.read()
-# file2 = open(file_path).readlines()
-# print(file2)
-# print(file)
+
 mylist = []
+
 def list_in_list(mylist):
     for line in file:
-        # extraction = re.findall(r"(?<=[ @])(\w+)(?=[ ])",line)
         extraction_2 = re.split(r"\s+", line)
-        # mylist.append(extraction)
         mylist.append(extraction_2[1:])
     return mylist
 
@@ -37,11 +33,6 @@ def initial_clean(mylist):
 def join_scores(mylist):
     new_list = []
     for list in mylist:
-        # for index in range(1,len(list)):
-        #     if list[index-1].isstr() and list[index].str():
-        #         new_inner_list += list[index-1] + " " + list[index]
-        #     else:
-        #         new_inner_list.append(list[index])
         inner_list = []
         current_string = ""
         for element in list:
@@ -62,9 +53,6 @@ def join_scores(mylist):
                 current_string = ""
 
         new_list.append(inner_list)
-        # print (type(inner_list))
-        # break
-        # print (len(new_list))
 
     return new_list
 
@@ -79,14 +67,12 @@ def populate_teams(mylist):
     for list in mylist:
         for element in list:
             if not element.isdigit() and element not in teams:
-                # print (element)
                 teams.append(element)
     return teams
 
 def winner(mylist):
     number_of_wins = {}
     for list in mylist:
-        # print(list)
         if list[1] > list[-1]:
             number_of_wins.setdefault(list[0],0)
             number_of_wins[list[0]] += 1
@@ -95,35 +81,20 @@ def winner(mylist):
             number_of_wins[list[2]] += 1
 
     winner_score = 0
-    temp_winner = ""
 
     for team, wins in number_of_wins.items():
         if wins > winner_score:
-            # print(team)
             winner_score = wins
-            temp_winner = team
-    print(temp_winner)
-    print("Winner is:", temp_winner, "With a total number of victories of:", winner_score)
     return number_of_wins
 
 def winning_team_in_match(mylist, switch):
 
-    mylist2 = [int(x) if x.isdigit() else x for x in mylist]
-    # for x in mylist:
-    #     if x.isdigit():
-    #         mylist2.append(int(x))
-    #     else:
-    #         mylist2.append(x)
-
+    mylist2 = [int(x) if x.isdigit() else x for x in mylist] # Changes digits in the list to be int instead of str
 
     if mylist2[1] > mylist2[-1]:
-        print("first")
         switch = True
         return(mylist2[0], switch)
     elif mylist2[1] < mylist2[-1]:
-        # print("mylist[1]:", mylist[1],type(mylist[1]))
-        # print("mylist[-1]:", mylist[-1],type(mylist[-1]))
-        print("second")
         switch = True
         return(mylist2[2], switch)
 
@@ -133,30 +104,16 @@ def transitive (team_list, all_scores):
     winning_teams = ["Ferris St",]
     switch = True
     switch_counter = 0
-    while switch:
+    while switch: # Allows looping over the winning teams in the case that not all scores are picked up on the first pass
         switch = False
         switch_counter += 1
         for team in winning_teams:
             for match in mod_team_list:
                 if team in match:
-                    print("Team:", team, "matched")
-                    print("Match:", match)
-
                     winners, switch = (winning_team_in_match(match, switch))
-
-
                     if winners not in winning_teams:
                         winning_teams.append(winners)
-                    print("Winners:", winners)
-                    print()
-                    print(switch_counter)
-                    print(switch)
-                    print("Matches left to sort:", len(mod_team_list))
                     mod_team_list.remove(match)
-                    print("----------------------")
-            print("********")
-            print("Teams not matched:", team)
-            print("Match:", match)
 
     return winning_teams
 
@@ -169,7 +126,7 @@ def main():
     bar_3 = (clean_two(bar_2))
     teams = populate_teams(bar_3)
 
-    print(len(transitive(teams, bar_3)) - 1) # -1 to remove the overall winner
+    print(len(transitive(teams, bar_3)))
 
 if __name__ == "__main__":
     main()
