@@ -107,12 +107,26 @@ def winner(mylist):
     return number_of_wins
 
 def winning_team_in_match(mylist, switch):
-    if mylist[1] > mylist[-1]:
+
+    mylist2 = [int(x) if x.isdigit() else x for x in mylist]
+    # for x in mylist:
+    #     if x.isdigit():
+    #         mylist2.append(int(x))
+    #     else:
+    #         mylist2.append(x)
+
+
+    if mylist2[1] > mylist2[-1]:
+        print("first")
         switch = True
-        return(mylist[0], switch)
-    elif mylist[1] < mylist[-1]:
+        return(mylist2[0], switch)
+    elif mylist2[1] < mylist2[-1]:
+        # print("mylist[1]:", mylist[1],type(mylist[1]))
+        # print("mylist[-1]:", mylist[-1],type(mylist[-1]))
+        print("second")
         switch = True
-        return(mylist[2], switch)
+        return(mylist2[2], switch)
+
 
 def transitive (team_list, all_scores):
     mod_team_list = all_scores.copy()
@@ -146,23 +160,20 @@ def transitive (team_list, all_scores):
 
     return winning_teams
 
+def main():
 
+    foo = list_in_list(mylist)
+    initial_clean(foo)
+    bar = join_scores(foo)
+    bar_2 = initial_clean(bar)
+    bar_3 = (clean_two(bar_2))
+    teams = populate_teams(bar_3)
 
-## then if there are 4 elements in the list
+    print(len(transitive(teams, bar_3)) - 1) # -1 to remove the overall winner
 
-foo = list_in_list(mylist)
-# print(foo)
-initial_clean(foo)
-bar = join_scores(foo)
-bar_2 = initial_clean(bar)
-bar_3 = (clean_two(bar_2))
-teams = populate_teams(bar_3)
+if __name__ == "__main__":
+    main()
 
-# print(foo)
-print(winner(bar_3))
-print(bar_3)
-print(len(transitive(teams, bar_3)))
-print(len(bar_3))
 
 # Return list with all teams
 # Overall winner = number 1 so can remove that team from this list
