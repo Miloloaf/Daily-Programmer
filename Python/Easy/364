@@ -1,0 +1,18 @@
+#[2018-06-18] Challenge #364 [Easy] Create a Dice Roller
+#https://www.reddit.com/r/dailyprogrammer/comments/8s0cy1/20180618_challenge_364_easy_create_a_dice_roller/
+#DnD_roller.py - Rolls a number of dice (x) with faces(y) in format xdy
+
+import random
+
+dice = str(input("Please enter your roll:\n"))
+
+numbers = dice.split("d")
+rolls = []
+for dice in range(int(numbers[0])):
+    result = random.randint(1, int(numbers[1]))
+    rolls.append(result)
+
+str_rolls = " ".join(str(x) for x in rolls)
+total = sum(rolls)
+
+print (str(total)+":", str(str_rolls))
