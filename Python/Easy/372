@@ -1,0 +1,22 @@
+#! python3
+# [2019-01-14] Challenge #372 [Easy] Perfectly balanced
+# https://www.reddit.com/r/dailyprogrammer/comments/afxxca/20190114_challenge_372_easy_perfectly_balanced/
+
+foo = ""
+matches = {}
+matches_reorder = {}
+
+for letter in foo:
+    matches.setdefault(letter, 0)
+    matches[letter] += 1
+
+for (letter, value) in matches.items():
+    matches_reorder[value] = letter
+
+if len(matches_reorder) == 1 or len(matches_reorder) == 0:
+    print ("True")
+else:
+    print("False")
+
+#print(matches)
+#print(matches_reorder)
