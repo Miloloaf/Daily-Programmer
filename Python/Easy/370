@@ -1,0 +1,34 @@
+#! python3
+
+#https://www.reddit.com/r/dailyprogrammer/comments/a72sdj/20181217_challenge_370_easy_upc_check_digits/
+#[2018-12-17] Challenge #370 [Easy] UPC check digits
+
+bar = "03600029145"
+oddlist_string = list(bar[::2])
+oddlist = []
+evenlist_string = list(bar[1::2])
+evenlist = []
+
+evens = 0
+
+for odd in oddlist_string:
+    oddlist.append(int(odd))
+
+for even in evenlist_string:
+    evenlist.append(int(even))
+
+def upc():
+    odds = sum(oddlist) * 3
+    evens = sum(evenlist)
+    calculations = odds + evens
+    if calculations%10 == 0:
+        return 0
+
+    else:
+        return (10 - calculations%10)
+
+print(upc())
+
+# for odd in range(1,len(str(foo)) + 2,2):
+#     oddlist.append(str(foo)[odd])
+#     print(oddlist)
