@@ -1,0 +1,19 @@
+#https://www.reddit.com/r/dailyprogrammer/comments/cmd1hb/20190805_challenge_380_easy_smooshed_morse_code_1/
+#[2019-08-05] Challenge #380 [Easy] Smooshed Morse Code 1
+
+raw_morse = ".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.."
+alphabet = "abcdefghijklmnopqrstuvwxyz"
+morse = {}
+
+for dots in raw_morse.split(" "):
+    morse[alphabet[0]] = dots
+    alphabet = alphabet [1:]
+
+def convert(string):
+    smoosh = ""
+    string = string.lower()
+    for letter in string:
+        smoosh += morse[letter]
+    print(smoosh)
+
+convert("bits")
