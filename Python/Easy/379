@@ -1,0 +1,33 @@
+#!python 3
+
+# [2019-07-15] Challenge #379 [Easy] Progressive taxation
+# https://www.reddit.com/r/dailyprogrammer/comments/cdieag/20190715_challenge_379_easy_progressive_taxation/
+
+#TODO Bonus + Shorten code with list looping
+
+def tax(income_value):
+    acc_tax = 0
+
+    while income_value > 0:
+        if income_value >0 :
+            tax = 0
+            income_value -= 10000
+            acc_tax += tax
+
+        if income_value >0 :
+            tax = income_value * 0.10
+            income_value -= 30000
+            acc_tax += tax
+
+        if  income_value >0 :
+            tax = income_value *0.25
+            income_value -= 100000
+            acc_tax += tax
+
+        if income_value > 0 :
+            tax = income_value * 0.4
+            acc_tax += tax
+
+    return(int(acc_tax))
+
+print(tax(12000))
