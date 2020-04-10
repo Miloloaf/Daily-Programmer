@@ -1,0 +1,14 @@
+//Basic Algorithm Scripting: Title Case a Sentence
+// Return the provided string with the first letter of each word capitalized. Make sure the rest of the word is in lower case.
+
+function titleCase(str) {
+  let result = str.toLowerCase();
+  result = result.split(" ");
+  let new_str = ""
+  for (let i=0; i<result.length; i++){
+    new_str += result[i].slice(0,1).toUpperCase() + result[i].slice(1, result[i].length) + " ";
+  }
+  return new_str.slice(0, new_str.length -1);
+}
+
+console.log(titleCase("I'm a little tea pot"));
