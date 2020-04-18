@@ -1,0 +1,23 @@
+//https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/intermediate-algorithm-scripting/wherefore-art-thou
+
+function whatIsInAName(collection, source) {
+  var arr = [];
+  // Only change code below this line
+    let sourceKeys = Object.keys(source)
+    collection.forEach(collection_arr => {
+        let temp_collection = []
+        sourceKeys.map(x => {
+            temp_collection.push(source[x] == collection_arr[x]);
+            if (temp_collection.length == sourceKeys.length){
+                let bool_result = temp_collection.every(bool => bool == true);
+                if (bool_result) {
+                    arr.push(collection_arr);
+                }
+            }
+        })
+    });
+  // Only change code above this line
+  return arr;
+}
+
+whatIsInAName([{ first: "Romeo", last: "Montague" }, { first: "Mercutio", last: null }, { first: "Tybalt", last: "Capulet" }], { last: "Capulet" });
