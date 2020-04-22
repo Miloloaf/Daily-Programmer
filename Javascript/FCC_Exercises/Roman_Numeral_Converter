@@ -1,0 +1,52 @@
+//https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/roman-numeral-converter
+
+function convertToRoman(num) {
+
+    function createRomans(pre, middle, post, digits) {
+        let arr = {}
+        for (let i = 1; i< 10; i++){
+            if (i < 4){
+                arr[i*digits] = pre.repeat(i)
+            }
+            else if (i == 4) {
+                arr[i*digits] = pre+middle
+            }
+            else if (i == 5) {
+                arr[i*digits] = middle
+            }
+            else if (i < 9 && i > 5 ) {
+                arr[i*digits] = middle+(pre.repeat(i-5))
+            }
+            else if (i == 9) {
+                arr[i*digits] = pre+post
+            } else {
+                break
+            }
+        }return arr
+    }
+
+    let arr1 = createRomans("I", "V", "X", 1)
+    let arr2 = createRomans("X","L","C",10)
+    let arr3 = createRomans("C","D","M", 100)
+    let arr4 = createRomans("M","W","Z",1000)
+
+    let romanArray = {...arr1, ...arr2, ...arr3, ...arr4}
+    let digits = num.toString()
+    let bases = [parseInt(digits.charAt(digits.length-1))]
+    if (digits.length > 1){
+        for (let i= 2; i <= digits.length; i++){
+            let tens = Math.pow(10, i-1)
+            bases.unshift(tens*parseInt(digits.charAt(digits.length-i)))
+        }
+    };
+
+    let result = ""
+    bases
+        .filter(x => !!x)
+        .forEach(x => result += romanArray[x]);
+
+    return result
+
+   }
+
+convertToRoman(36);
