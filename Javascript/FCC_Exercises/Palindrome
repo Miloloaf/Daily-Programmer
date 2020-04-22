@@ -1,0 +1,27 @@
+//https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/palindrome-checker
+
+function palindrome(str) {
+    let myReg = /[A-Za-z0-9]+/ig;
+    let arr = str.match(myReg);
+    let mashedStr = ""
+    if (arr.length > 1){
+        mashedStr = arr.join("")
+    } else {
+        mashedStr = arr[0]
+    }
+    
+    mashedStr = mashedStr.toLowerCase()
+    for (let i = 0; i< mashedStr.length; i++) {
+        let reversedI = mashedStr.length-1-i;
+        
+        if((mashedStr.charAt(i) !== mashedStr.charAt(reversedI))){
+            return false;
+        }
+    }return true
+  }
+  
+  
+  
+  console.log(palindrome("eye"));
+  console.log() 
+  console.log(palindrome("race car"))
