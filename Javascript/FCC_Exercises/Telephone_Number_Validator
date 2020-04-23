@@ -1,0 +1,36 @@
+//https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/telephone-number-validator
+
+function telephoneCheck(str) {
+    let myreg = /1?\s?(\d){3}\D*?(\d){3}.?(\d){4}$/
+
+    let bracketReg = /\((\d){3}\)/
+
+    let brokenBracket = /[^\(]...\)/
+    let brokenBracket2 = /^(\d){3}\)/
+    let brokenBracket3 = /\(...[^\)]/
+    let negativeReg = /^-/
+
+
+    if (brokenBracket.test(str) || negativeReg.test(str) || brokenBracket2.test(str) || brokenBracket3.test(str)) { // Matches broken brackets
+        return false
+    }  
+
+    let stripped = str.replace(/\D*/g, "") // Looks at country code for 1
+    if (stripped.length == 11) {
+        if (stripped.charAt(0) !== "1") {
+            console.log("Not equal to country code")
+            return false
+        } 
+
+    } else if (stripped.length > 11) {
+        return false
+    }
+
+    if (myreg.test(str)){
+        console.log("Hopefully correct")
+        return true
+    }
+
+    return false;
+  }
+  
