@@ -1,0 +1,23 @@
+//https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/caesars-cipher
+
+function rot13(str) {
+    let startA = "A".charCodeAt(0)
+    let endZ = "Z".charCodeAt(0)
+    let result = ""
+
+    for (let i = 0; i < str.length; i++){
+        let code = str.charCodeAt(i)
+
+        if (78 <= code && code <= 90) {
+            result += String.fromCharCode(code-13)
+        } else if( 65 <= code && code <= 77) {
+            let negShift =  endZ -  (startA - code + 12)
+            result += String.fromCharCode(negShift)
+
+        } else {
+            result += str.charAt(i)
+        }
+    }
+    return result;
+  }
+rot13("SERR PBQR PNZC");
