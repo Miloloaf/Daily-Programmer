@@ -1,0 +1,73 @@
+//https://www.freecodecamp.org/learn/javascript-algorithms-and-data-structures/javascript-algorithms-and-data-structures-projects/cash-register
+
+function checkCashRegister(price, cash, cid) {
+    let change = cash - price;
+    let amount = []
+    let currency = [100, 20, 10, 5, 1, 0.25, 0.1, 0.05, 0.01]
+    let names = []
+    let physical = {}
+    let physicalChange = []
+    let tillchange = []
+
+    cid.forEach((obj, val) => {
+        amount.unshift(obj[1])
+        names.unshift(obj[0])
+        return obj[1]}
+    )
+
+    for (let i = 0; i<currency.length; i++) {
+        if (amount[i] == 0) {
+            physical[currency[i]] = 0
+        } else{
+        physical[currency[i]] = Math.round(amount[i]/currency[i])
+        }
+    }
+
+    currency.forEach(x => physicalChange.push(physical[x]))
+
+    let total = amount.reduce((a,b) => a+b)
+    if (total < change) {
+        return {"status": "INSUFFICIENT_FUNDS", "change": []}
+    }
+
+    if (total == change) {
+        return {"status": "CLOSED", "change": cid}
+    }
+
+    function calcs (value, physicalAmount, name, changeAmount){
+        let tempVal = 0
+
+        for (let i = 1; i<=physicalAmount; i++) {
+            changeAmount = parseFloat(changeAmount).toFixed(2);
+            if (changeAmount >= value) {
+                changeAmount -= value
+                tempVal = value * i
+            } else {
+            }
+        } tillchange.push([name, tempVal]);
+        return changeAmount
+    }
+    
+    if (change > 0) {
+        for (let i = 0; i <currency.length; i++){
+            if (physical[i] !== 0) {
+                change = calcs(currency[i], physicalChange[i], names[i], change)
+            }
+        }
+    }
+
+    let filteredTillChange = tillchange.filter(x => x[1] > 0)
+
+    let tempFilteredArray = []
+    filteredTillChange.forEach(obj => tempFilteredArray.push(obj[1]))
+    let filteredTotal = tempFilteredArray.reduce((a,b) => a+b)
+
+    if (filteredTillChange.length == 0 || filteredTotal < change){
+        return {"status": "INSUFFICIENT_FUNDS", "change": []}
+    }
+
+    return {"status": "OPEN", "change": filteredTillChange};
+  }
+  
+
+checkCashRegister(19.5, 20, [["PENNY", 1.01], ["NICKEL", 2.05], ["DIME", 3.1], ["QUARTER", 4.25], ["ONE", 90], ["FIVE", 55], ["TEN", 20], ["TWENTY", 60], ["ONE HUNDRED", 100]]);
